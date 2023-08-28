@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <stack>
+
 #include "MutantStack.hpp"
 
 int	main(void)
