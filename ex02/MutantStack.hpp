@@ -12,33 +12,32 @@
 
 #pragma once
 
-#include <deque>
+#include <stack>
 
-template<class T> class	MutantStack: public std::deque
+template<class T> class	MutantStack: public std::stack<T>
 {
 	public:
-		T&	top(void) const
+		typedef typename std::stack<T>::container_type::iterator				iterator;
+		typedef typename std::stack<T>::container_type::reverse_iterator		reverse_iterator;
+		// const iterators since C++11
+
+		iterator				begin(void)
 		{
-			return this->back();
+			return std::stack<T>::c.begin();
 		}
 
-		void	push(T& t)
+		iterator				end(void)
 		{
-			this->push_back(t);
+			return std::stack<T>::c.end();
 		}
 
-		void	emplace(T t)
+		reverse_iterator		rbegin(void)
 		{
-			this->emplace_back(t);
+			return std::stack<T>::c.rbegin();
 		}
 
-		void	pop(void);
+		reverse_iterator		rend(void)
 		{
-			this->pop_back();
-		}
-
-		void	swap(MutantStack& mutantStack)
-		{
-			this->swap(mutantStack);
+			return std::stack<T>::c.rend();
 		}
 };
