@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "Span.hpp"
+
+#include <list>
 
 int	main(void)
 {
@@ -44,13 +44,22 @@ int	main(void)
 		std::cout << s.longestSpan() << std::endl;
 	}
 	{
-		Span	s(100);
-		Span	s2(100);
-		Span	sErr(99);
+		Span				s(8);
+		std::list<int>		l(5, 9);
+		std::vector<int>	v(2, 2);
 
-		s.populate();
-		s2.addNumber(s.getV().begin(), s.getV().end());
-		s2.print();
-		// std::cout << "Equal ? -> " << std::equal(s.getV().begin(), s.getV().end(), s2.getV().begin()) << std::endl;
+		s.print();
+		s.addNumber(l.begin(), l.end());
+		s.print();
+		s.addNumber(v.begin(), v.end());
+		s.print();
+		try
+		{
+			s.addNumber(l.begin(), l.end());
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
 	}
 }

@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 #include <vector>
 
 class	Span
@@ -27,7 +28,7 @@ class	Span
 
 		template <class Iterator> void	addNumber(Iterator begin, Iterator end)
 		{
-			if (this->v.size() + std::distance(end, begin) > this->maxSize)
+			if (this->v.size() + std::abs(std::distance(begin, end)) > this->maxSize)
 				throw Span::FullVectorException();
 			std::copy(begin, end, std::back_inserter(this->v));
 		};
