@@ -20,6 +20,7 @@ int	main(void)
 	std::cout << "---List---" << std::endl;
 	{
 		std::list<int>	l;
+		std::cout << "Empty -> " << l.empty() << std::endl;
 		l.push_back(5);
 		l.push_back(17);
 		std::cout << l.back() << std::endl;

@@ -32,15 +32,28 @@ int	main(void)
 		}
 	}
 	{
-		Span sp = Span(10);
+		Span	s(0);
 
-		sp.addNumber(6);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
+		try
+		{
+			std::cout << s.shortestSpan() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << '\n';
+		}
+		
+	}
+	{
+		Span s = Span(10);
+
+		s.addNumber(6);
+		s.addNumber(3);
+		s.addNumber(17);
+		s.addNumber(9);
+		s.addNumber(11);
+		std::cout << s.shortestSpan() << std::endl;
+		std::cout << s.longestSpan() << std::endl;
 	}
 	{
 		Span	s(10);

@@ -12,7 +12,11 @@
 
 #include "Span.hpp"
 
-Span::Span(unsigned int size): v(std::vector<int>()), maxSize(size)
+Span::Span(const Span& span): _v(std::vector<int>(span.getV())), _maxSize(span.getMaxSize())
+{
+}
+
+Span::Span(const unsigned int& size): _v(std::vector<int>()), _maxSize(size)
 {
 }
 
@@ -20,40 +24,40 @@ Span::~Span(void)
 {
 }
 
-std::vector<int>	Span::getV(void) const
+const std::vector<int>&	Span::getV(void) const
 {
-	return this->v;
+	return this->_v;
 }
 
-unsigned int	Span::getMaxSize(void) const
+const unsigned int&	Span::getMaxSize(void) const
 {
-	return this->maxSize;
+	return this->_maxSize;
 }
 
 void	Span::populate(void)
 {
-	if (this->v.size() == this->maxSize)
+	if (this->_v.size() == this->_maxSize)
 		return ;
 	std::srand((int)time(NULL));
-	for (unsigned int i = this->v.size(); i < this->maxSize; i++)
-		this->v.push_back(std::rand());
+	for (unsigned int i = this->_v.size(); i < this->_maxSize; i++)
+		this->_v.push_back(std::rand());
 }
 
-void	Span::addNumber(int num) 
+void	Span::addNumber(const int& num) 
 {
-	if (this->v.size() == this->maxSize)
+	if (this->_v.size() == this->_maxSize)
 		throw Span::FullVectorException();
-	this->v.push_back(num);
+	this->_v.push_back(num);
 }
 
 int	Span::shortestSpan(void) const
 {
-	std::vector<int>	vAux(this->v.size(), 0);
+	std::vector<int>	vAux(this->_v.size(), 0);
 	int					shortestSpan;
 	
-	if (this->v.size() <= 1)
+	if (this->_v.size() <= 1)
 		throw Span::NoSpanFoundException();
-	std::partial_sort_copy(this->v.begin(), this->v.end(), vAux.begin(), vAux.end());
+	std::partial_sort_copy(this->_v.begin(), this->_v.end(), vAux.begin(), vAux.end());
 	shortestSpan = vAux[1] - vAux[0];
 	{
 		int	span;
@@ -72,18 +76,34 @@ int	Span::shortestSpan(void) const
 
 int	Span::longestSpan(void) const
 {
-	if (this->v.size() <= 1)
+	if (this->_v.size() <= 1)
 		throw Span::NoSpanFoundException();
-	return *std::max_element(this->v.begin(), this->v.end()) - *std::min_element(this->v.begin(), this->v.end());
+	return *std::max_element(this->_v.begin(), this->_v.end()) - *std::min_element(this->_v.begin(), this->_v.end());
 }
 
 void	Span::print(void) const
 {
-	std::cout << "Span(" << this->maxSize << "): ";
-	for (std::vector<int>::const_iterator it = this->v.begin(); it != this->v.end(); it++)
+	std::cout << "Span(" << this->_maxSize << "): ";
+	for (std::vector<int>::const_iterator it = this->_v.begin(); it != this->_v.end(); it++)
 		std::cout << *it << ", ";
 	std::cout << std::endl;
 }
+
+Span&	Span::operator=(const Span& span)
+{
+	if (this != &span)
+	{
+		this->_maxSize = span.getMaxSize();
+		this->_v = std::vector<int>(span.getV());
+	}
+	return *this;
+}
+
+const char*	Span::NotEnoughSpace::what(void) const throw()
+{
+	return "Not enough space";
+}
+
 
 const char*	Span::FullVectorException::what(void) const throw()
 {
