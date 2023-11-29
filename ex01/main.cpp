@@ -31,6 +31,7 @@ int	main(void)
 			std::cout << e.what() << std::endl;
 		}
 	}
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 	{
 		Span	s(0);
 
@@ -44,6 +45,7 @@ int	main(void)
 		}
 		
 	}
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 	{
 		Span s = Span(10);
 
@@ -52,24 +54,27 @@ int	main(void)
 		s.addNumber(17);
 		s.addNumber(9);
 		s.addNumber(11);
-		std::cout << s.shortestSpan() << std::endl;
-		std::cout << s.longestSpan() << std::endl;
+		std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+		std::cout << "Longest span: " << s.longestSpan() << std::endl;
 	}
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 	{
 		Span	s(10);
 
-		for (int i = 0; i < 10; i++)
+		for (unsigned int i = 0; i < s.getMaxSize(); i++)
 			s.addNumber(i);
-		std::cout << s.shortestSpan() << std::endl;
-		std::cout << s.longestSpan() << std::endl;
+		std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+		std::cout << "Longest span: " << s.longestSpan() << std::endl;
 	}
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 	{
 		Span	s(100000);
 
 		s.populate();
-		std::cout << s.shortestSpan() << std::endl;
-		std::cout << s.longestSpan() << std::endl;
+		std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+		std::cout << "Longest span: " << s.longestSpan() << std::endl;
 	}
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 	{
 		Span				s(8);
 		std::list<int>		l(5, 9);
@@ -80,6 +85,8 @@ int	main(void)
 		s.print();
 		s.addNumber(v.begin(), v.end());
 		s.print();
+		std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
+		std::cout << "Longest span: " << s.longestSpan() << std::endl;
 		try
 		{
 			s.addNumber(l.begin(), l.end());

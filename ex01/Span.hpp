@@ -24,6 +24,8 @@ class	Span
 		std::vector<int>	_v;
 		unsigned int		_maxSize;
 
+		Span(void);
+		
 		const std::vector<int>&	getV(void) const;
 	public:
 		Span(const Span& span);

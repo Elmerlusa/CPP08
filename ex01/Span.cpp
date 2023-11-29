@@ -12,6 +12,10 @@
 
 #include "Span.hpp"
 
+Span::Span(void): _v(std::vector<int>()), _maxSize(0)
+{
+}
+
 Span::Span(const Span& span): _v(std::vector<int>(span.getV())), _maxSize(span.getMaxSize())
 {
 }
@@ -85,7 +89,7 @@ void	Span::print(void) const
 {
 	std::cout << "Span(" << this->_maxSize << "): ";
 	for (std::vector<int>::const_iterator it = this->_v.begin(); it != this->_v.end(); it++)
-		std::cout << *it << ", ";
+		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 
